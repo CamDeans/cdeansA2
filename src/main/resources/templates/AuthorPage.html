@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid mx-3">
+        <div class="row justify-content-center my-4">
+            <h1 class="display-2">Database Tables</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 border border-dark">
+                <h2 class="display-4 text center">Authors</h2>
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Books</th>
+                    </tr>
+                    <tr th:each="author:${authorList}">
+                        <td th:text="${author.authorId}"></td>
+                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
+                        <td>
+                            <!-- Nested table required 
+                                 If author has a book assigned to author name and 
+                                 if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList}" class="table-borderless my-0">
+                                <tr th:each="book:${author.bookList}">
+                                    <td th:text="${book.bookTitle}"></td>
+                                </tr>
+                            </table>
+                            <!-- Nested table required 
+                                 else If author does not have a book assigned to author name and 
+                                 else if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
+                                <tr>
+                                    <td>No books from this author</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-7 border border-dark">
+                <h2 class="display-4 text-center">Books</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${bookList}" th:each="book:${bookList}">
+                            <td th:text="${book.bookId}"></td>
+                            <td th:text="${book.bookTitle}"></td>
+                            <td th:text="${book.price}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 border border-dark">
+                <h2 class="display-4 text-center">Ordered By Last Name</h2>
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Books</th>
+                    </tr>
+                    <tr th:each="author:${authorLastNameOrderedList}">
+                        <td th:text="${author.authorId}"></td>
+                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
+                        <td>
+                            <!-- Nested table required 
+                                 If author has a book assigned to author name and 
+                                 if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList}" class="table-borderless my-0">
+                                <tr th:each="book:${author.bookList}">
+                                    <td th:text="${book.bookTitle}"></td>
+                                </tr>
+                            </table>
+                            <!-- Nested table required 
+                                 else If author does not have a book assigned to author name and 
+                                 else if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
+                                <tr>
+                                    <td>No books from this author</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-7 border border-dark">
+                <h2 class="display-4 text-center">Ordered By First Name</h2>
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Books</th>
+                    </tr>
+                    <tr th:each="author:${authorFirstNameOrderedList}">
+                        <td th:text="${author.authorId}"></td>
+                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
+                        <td>
+                            <!-- Nested table required 
+                                 If author has a book assigned to author name and 
+                                 if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList}" class="table-borderless my-0">
+                                <tr th:each="book:${author.bookList}">
+                                    <td th:text="${book.bookTitle}"></td>
+                                </tr>
+                            </table>
+                            <!-- Nested table required 
+                                 else If author does not have a book assigned to author name and 
+                                 else if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
+                                <tr>
+                                    <td>No books from this author</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
