@@ -1,5 +1,6 @@
 package com.assignment2.cdeans.model;
 
+import javax.imageio.ImageIO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name="BOOK")
 @NoArgsConstructor
 public class Book {
-    public Book(String bookTitle, String price) {
+    public Book(String bookTitle, Double price) {
         this.bookTitle = bookTitle;
         this.price = price;
     }
@@ -29,5 +30,5 @@ public class Book {
     private String bookTitle;
 
     @Column(name="BOOK_PRICE")
-    private String price;
+    private Double price;
 }

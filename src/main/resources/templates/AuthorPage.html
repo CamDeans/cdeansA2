@@ -4,138 +4,136 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid mx-3">
-        <div class="row justify-content-center my-4">
-            <h1 class="display-2">Database Tables</h1>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-4 border border-dark">
-                <h2 class="display-4 text center">Authors</h2>
-                <table class="table">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Books</th>
-                    </tr>
-                    <tr th:each="author:${authorList}">
-                        <td th:text="${author.authorId}"></td>
-                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
-                        <td>
-                            <!-- Nested table required 
-                                 If author has a book assigned to author name and 
-                                 if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList}" class="table-borderless my-0">
-                                <tr th:each="book:${author.bookList}">
-                                    <td th:text="${book.bookTitle}"></td>
-                                </tr>
-                            </table>
-                            <!-- Nested table required 
-                                 else If author does not have a book assigned to author name and 
-                                 else if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
-                                <tr>
-                                    <td>No books from this author</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+    <main>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <h1 class="display-2">Authors & Books</h1>
             </div>
-            <div class="col-7 border border-dark">
-                <h2 class="display-4 text-center">Books</h2>
-                <table class="table">
-                    <thead>
+            <div class="row justify-content-center">
+                <div class="col-6 border border-dark">
+                    <h2 class="display-4 text-center">Authors</h2>
+                    <table class="table">
                         <tr>
                             <th>Id</th>
-                            <th>Title</th>
-                            <th>Price</th>
+                            <th>Name</th>
+                            <th>Books</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:if="${bookList}" th:each="book:${bookList}">
-                            <td th:text="${book.bookId}"></td>
-                            <td th:text="${book.bookTitle}"></td>
-                            <td th:text="${book.price}"></td>
+                        <tr th:each="author:${authorList}">
+                            <td th:text="${author.authorId}"></td>
+                            <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
+                            <td>
+                                <!-- Nested table required 
+                                     If author has a book assigned to author name and 
+                                     if there is anything in the book list
+                                -->
+                                <table th:if="${author.bookList}" class="table-borderless">
+                                    <tr th:each="book:${author.bookList}">
+                                        <td th:text="${book.bookTitle}"></td>
+                                    </tr>
+                                </table>
+                                <!-- Nested table required 
+                                     else If author does not have a book assigned to author name and 
+                                     else if there is anything in the book list
+                                -->
+                                <table th:if="${author.bookList.empty}" class="table-borderless">
+                                    <tr>
+                                        <td>No books from this author</td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
-                    </tbody>
-                </table>
+                    </table>
+                </div>
+                <div class="col-6 border border-dark">
+                    <h2 class="display-4 text-center">Books</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Price ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${bookList}" th:each="book:${bookList}">
+                                <td th:text="${book.bookId}"></td>
+                                <td th:text="${book.bookTitle}"></td>
+                                <td th:text="${book.price}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-4 border border-dark">
-                <h2 class="display-4 text-center">Ordered By Last Name</h2>
-                <table class="table">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Books</th>
-                    </tr>
-                    <tr th:each="author:${authorLastNameOrderedList}">
-                        <td th:text="${author.authorId}"></td>
-                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
-                        <td>
-                            <!-- Nested table required 
-                                 If author has a book assigned to author name and 
-                                 if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList}" class="table-borderless my-0">
-                                <tr th:each="book:${author.bookList}">
-                                    <td th:text="${book.bookTitle}"></td>
-                                </tr>
-                            </table>
-                            <!-- Nested table required 
-                                 else If author does not have a book assigned to author name and 
-                                 else if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
-                                <tr>
-                                    <td>No books from this author</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+        </div> 
+    </main>      
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 p-3 border border-dark">
+                <h4>Find By Last Name</h4>
+                <form action="/findLastOrFirst" method="POST">
+                    <input type="text" name="lastName" minlength="2" placeholder="Last Name">
+                    <br><br>
+                    <input type="text" name="firstName" minlength="2" placeholder="First Name">
+                    <br><br>
+                    <input type="submit" value="Find">
+                </form>
             </div>
-            <div class="col-7 border border-dark">
-                <h2 class="display-4 text-center">Ordered By First Name</h2>
-                <table class="table">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Books</th>
-                    </tr>
-                    <tr th:each="author:${authorFirstNameOrderedList}">
-                        <td th:text="${author.authorId}"></td>
-                        <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
-                        <td>
-                            <!-- Nested table required 
-                                 If author has a book assigned to author name and 
-                                 if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList}" class="table-borderless my-0">
-                                <tr th:each="book:${author.bookList}">
-                                    <td th:text="${book.bookTitle}"></td>
-                                </tr>
-                            </table>
-                            <!-- Nested table required 
-                                 else If author does not have a book assigned to author name and 
-                                 else if there is anything in the book list
-                            -->
-                            <table th:if="${author.bookList.empty}" class="table-borderless my-0">
-                                <tr>
-                                    <td>No books from this author</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+            <div class="col-12 p-3 border border-dark">
+                <h4>Find By Last Name Starting With</h4>
+                <form action="/findByLastNameStartingWith" method="POST">
+                    <br>
+                    <input type="text" name="prefixString" placeholder="Last Name Letter">
+                    <br><br>
+                    <input type="submit" value="Find">
+                </form>
             </div>
-        </div>
+            <div class="col-12 p-3 border border-dark">
+                <h4>Find By Last Name Containing</h4>
+                <form action="/findByLastNameContaining" method="POST">
+                    <br>
+                    <input type="text" name="infixString" placeholder="IE> Abc -OR- abc">
+                    <br><br>
+                    <input type="submit" value="Find">
+                </form>
+            </div>
+            <div class="col-12 p-3 border border-dark">
+                <form action="/books" method="POST">
+                    <label for="order_by_first_name_desc">Order Author(s) By First Name Descending</label>
+                    <br>
+                    <input type="submit" value="Order By First Name" formaction="/orderByFirstNameDesc">
+                    <br><br>
+                    <label for="order_by_last_name_ascending">Order Author(s) By Last Name Ascending</label>
+                    <br>
+                    <input type="submit" value="Order By Last Name" formaction="/orderByLastNameAsc">
+                    <br><br>
+                    <label for="order_by_book_title">Order Book(s) By Title</label>
+                    <br>
+                    <input type="submit" value="Order By Boom Title" formaction="/orderByBookTitle">
+                    <br><br>
+                    <label for="order_by_price">Order Book(s) By Price</label>
+                    <br>
+                    <input type="submit" value="Order By Price" formaction="/orderByPrice">
+                    <br><br>
+                    <label for="find_by_book_title_containing_introduction">Find Book Title(s) Containing Java & Introduction</label>
+                    <br>
+                    <input type="submit" value="Find By Book Title" formaction="/findByBookTitleContaining">
+                    <br><br>
+                    <label for="find_by_book_title_not_containing_java">Find Book Title(s) Not Containing Java</label>
+                    <br>
+                    <input type="submit" value="Find Book Title(s)" formaction="/findByBookTitleNotLike">
+                    <br><br>
+                    <label for="find_by_book_title_containing_introduction_not_like_java">Find Book Title(s) Containing Introduction & Omit Book Titles Containing Java</label>
+                    <br>
+                    <input type="submit" value="Find Book Title(s)" formaction="/findByBookTitleNotLikeAndContaining">
+                </form>
+            </div>
+        </div> 
     </div>
 </body>
 </html>
