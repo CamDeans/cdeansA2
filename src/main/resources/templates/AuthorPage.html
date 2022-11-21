@@ -10,130 +10,186 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <h1 class="display-2">Authors & Books</h1>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-6 border border-dark">
-                    <h2 class="display-4 text-center">Authors</h2>
-                    <table class="table">
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Books</th>
-                        </tr>
-                        <tr th:each="author:${authorList}">
-                            <td th:text="${author.authorId}"></td>
-                            <td th:text="${author.firstName} + ' ' + ${author.lastName}"></td>
-                            <td>
-                                <!-- Nested table required 
-                                     If author has a book assigned to author name and 
-                                     if there is anything in the book list
-                                -->
-                                <table th:if="${author.bookList}" class="table-borderless">
-                                    <tr th:each="book:${author.bookList}">
-                                        <td th:text="${book.bookTitle}"></td>
-                                    </tr>
-                                </table>
-                                <!-- Nested table required 
-                                     else If author does not have a book assigned to author name and 
-                                     else if there is anything in the book list
-                                -->
-                                <table th:if="${author.bookList.empty}" class="table-borderless">
-                                    <tr>
-                                        <td>No books from this author</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-6 border border-dark">
-                    <h2 class="display-4 text-center">Books</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Price ($)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:if="${bookList}" th:each="book:${bookList}">
-                                <td th:text="${book.bookId}"></td>
-                                <td th:text="${book.bookTitle}"></td>
-                                <td th:text="${book.price}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="container">
+        <a href="http://localhost:8080"><i class="fa fa-home" title="Home" id="myHomeBtn"></i></a>
+        <h2 class="row justify-content-center">Cameron M Deans: Assignment# 2</h2>
+        <p class="header-p">Author & Book Finder Application</p1>
+
+    <div class="row">
+        <div class="card col-2">
+            <h4>Authors</h4>
+            <p>User Filter Criteria</p>
+            <form action="/findLastOrFirst" method="POST">
+                <label><b>Find By First Name</b></label>
+                <br>
+                <input type="text" name="firstName" minlength="2" placeholder="First Name">
+                <br>
+                <label><b>Find By Last Name</b></label>
+                <br>
+                <input type="text" name="lastName" minlength="2" placeholder="Last Name">
+                <br><br>
+                <input type="submit" value="Find">
+            </form>
+            <br>
+            <label><b>Find By Last Name Starting With</b></label>
+            <form action="/findByLastNameStartingWith" method="POST">
+                <input type="text" name="prefixString" placeholder="Last Name Letter">
+                <br><br>
+                <input type="submit" value="Find">
+            </form>
+            <br>
+            <label><b>Find By Last Name Containing</b></label>
+            <form action="/findByLastNameContaining" method="POST">
+                <input type="text" name="infixString" placeholder="IE> Abc -OR- abc">
+                <br><br>
+                <input type="submit" value="Find">
+            </form>
+            <br>
+            <form action="/books" method="POST">
+                <label><b>Order Author(s) By First Name Descending</b></label>
+                <input type="submit" value="Order" formaction="/orderByFirstNameDesc">
+                <br><br>
+                <label><b>Order Author(s) By Last Name Ascending</b></label>
+                <input type="submit" value="Order" formaction="/orderByLastNameAsc">
+                <br><br>
+            </form>
+        </div>
+        <div class="card col-4">
+            <h4>Authors</h4>
+            <p>Table of Contents</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="author:${authorList}">
+                        <td th:text="${author.authorId}"></td>
+                        <td th:text="${author.firstName}"></td>
+                        <td th:text="${author.lastName}"></td>
+                        <td>
+                            <!-- Nested table required 
+                                 If author has a book assigned to author name and 
+                                 if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList}" class="table-borderless">
+                                <tr th:each="book:${author.bookList}">
+                                    <td th:text="${book.bookTitle}"></td>
+                                </tr>
+                            </table>
+                            <!-- Nested table required 
+                                 else If author does not have a book assigned to author name and 
+                                 else if there is anything in the book list
+                            -->
+                            <table th:if="${author.bookList.empty}" class="table-borderless">
+                                <tr>
+                                    <td>No books from this author</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card col-2">
+            <h4>Books</h4>
+            <p>User Filter Criteria</p>
+            <form action="/books" method="POST">
+                <label><b>Order Book(s) By Title</b></label>
+                <input type="submit" value="Order" formaction="/orderByBookTitle">
+                <br><br>
+                <label><b>Order Book(s) By Price</b></label>
+                <input type="submit" value="Order" formaction="/orderByPrice">
+                <br><br>
+                <label><b>Find Book Title(s) Containing Java & Introduction</b></label>
+                <input type="submit" value="Find" formaction="/findByBookTitleContaining">
+                <br><br>
+                <label><b>Find Book Title(s) Not Containing Java</b></label>
+                <input type="submit" value="Find" formaction="/findByBookTitleNotLike">
+                <br><br>
+                <label><b>Find Book Title(s) Containing Introduction & Omit Book Titles Containing Java</b></label>
+                <input type="submit" value="Find" formaction="/findByBookTitleNotLikeAndContaining">
+            </form>
         </div> 
-    </main>      
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-12 p-3 border border-dark">
-                <h4>Find By Last Name</h4>
-                <form action="/findLastOrFirst" method="POST">
-                    <input type="text" name="lastName" minlength="2" placeholder="Last Name">
-                    <br><br>
-                    <input type="text" name="firstName" minlength="2" placeholder="First Name">
-                    <br><br>
-                    <input type="submit" value="Find">
-                </form>
-            </div>
-            <div class="col-12 p-3 border border-dark">
-                <h4>Find By Last Name Starting With</h4>
-                <form action="/findByLastNameStartingWith" method="POST">
-                    <br>
-                    <input type="text" name="prefixString" placeholder="Last Name Letter">
-                    <br><br>
-                    <input type="submit" value="Find">
-                </form>
-            </div>
-            <div class="col-12 p-3 border border-dark">
-                <h4>Find By Last Name Containing</h4>
-                <form action="/findByLastNameContaining" method="POST">
-                    <br>
-                    <input type="text" name="infixString" placeholder="IE> Abc -OR- abc">
-                    <br><br>
-                    <input type="submit" value="Find">
-                </form>
-            </div>
-            <div class="col-12 p-3 border border-dark">
-                <form action="/books" method="POST">
-                    <label for="order_by_first_name_desc">Order Author(s) By First Name Descending</label>
-                    <br>
-                    <input type="submit" value="Order By First Name" formaction="/orderByFirstNameDesc">
-                    <br><br>
-                    <label for="order_by_last_name_ascending">Order Author(s) By Last Name Ascending</label>
-                    <br>
-                    <input type="submit" value="Order By Last Name" formaction="/orderByLastNameAsc">
-                    <br><br>
-                    <label for="order_by_book_title">Order Book(s) By Title</label>
-                    <br>
-                    <input type="submit" value="Order By Boom Title" formaction="/orderByBookTitle">
-                    <br><br>
-                    <label for="order_by_price">Order Book(s) By Price</label>
-                    <br>
-                    <input type="submit" value="Order By Price" formaction="/orderByPrice">
-                    <br><br>
-                    <label for="find_by_book_title_containing_introduction">Find Book Title(s) Containing Java & Introduction</label>
-                    <br>
-                    <input type="submit" value="Find By Book Title" formaction="/findByBookTitleContaining">
-                    <br><br>
-                    <label for="find_by_book_title_not_containing_java">Find Book Title(s) Not Containing Java</label>
-                    <br>
-                    <input type="submit" value="Find Book Title(s)" formaction="/findByBookTitleNotLike">
-                    <br><br>
-                    <label for="find_by_book_title_containing_introduction_not_like_java">Find Book Title(s) Containing Introduction & Omit Book Titles Containing Java</label>
-                    <br>
-                    <input type="submit" value="Find Book Title(s)" formaction="/findByBookTitleNotLikeAndContaining">
-                </form>
-            </div>
-        </div> 
+        <div class="card col-4">
+            <h4>Books</h4>
+            <p>Table of Contents</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Price ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${bookList}" th:each="book:${bookList}">
+                        <td th:text="${book.bookId}"></td>
+                        <td th:text="${book.bookTitle}"></td>
+                        <td th:text="${book.price}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <br>
+     <!------Questions & Comments------>
+     <div class="content-box">
+        <div class="container">
+          <h1>Questions & Comments</h1>
+            <div class="DataPair">
+              <div class="row">
+                <div class="col-3"></div>
+                  <div class="col-md-6 contact-info">
+                    <div class="follow">
+                      <i class="fa fa-address-card"></i><span>Cameron Deans</span>
+                    </div>
+                    <div class="follow">
+                      <i class="fa fa-map-marker"></i><span>201-187 Amherst Drive Amherstview, ON</span>
+                    </div>
+                    <div class="follow">
+                      <i class="fa fa-phone"></i><span><a href="tel:(613)561-7885" data-type="phone">(613) 561-7885</a></span>
+                    </div>
+                    <div class="follow">
+                      <i class="fa fa-envelope"></i><span><a href="mailto:cameron.deans@student.sl.on.ca" data-type="email">cameron.deans@student.sl.on.ca</a></span>
+                    </div>
+                    <!------Footer------>
+                    <div class="footer">
+                      <hr>
+                      <p class="copyright">Copyrights | 2021 | Made by Cameron M Deans</i></p>
+                    </div>
+                  </div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <br>
+      </div> 
+</div>    
+<a href="#"><i class="fa fa-arrow-up" id="myBtn"></i></a> 
 </body>
-</html>
+<!------Javascript------>
+<script>
+    mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0; 
+      document.documentElement.scrollTop = 0; 
+    }
+  </script>
+</html>       
