@@ -65,42 +65,24 @@ public class MainController {
     }
 
     // generate @GetMapping starts
-    @GetMapping("/data")
+    @GetMapping("/authorPage")
     public String getData(Model model) {
         List<Author> authorList = (List<Author>)authorRepo.findAll();
-        List<Book> bookList = (List<Book>)bookRepo.findAll();
-
-        model.addAttribute("bookList", bookList);
         model.addAttribute("authorList", authorList);
 
         return "authorPage";
     }
 
-    /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
-     */
-    @PostMapping("/orderByBookTitle")
-    public String findAllByOrderByBookTitle(Model model) {
-        List<Book> books = bookRepo.findAllByOrderByBookTitle();
-        model.addAttribute("bookList", books);
+    // generate @GetMapping starts
+    @GetMapping("/bookPage")
+    public String getData1(Model model) {
+        List<Book> bookList = (List<Book>)bookRepo.findAll();
+        model.addAttribute("bookList", bookList);
 
-        return "authorPage";
+        return "bookPage";
     }
 
-       /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
-     */
-    @PostMapping("/orderByPrice")
-    public String findAllByOrderByPriceAsc(Model model) {
-        List<Book> books = bookRepo.findAllByOrderByPriceAsc();
-        model.addAttribute("bookList", books);
-
-        return "authorPage";
-    }
-
-      /*
+     /*
      * order bookTitle by using the findAllByOrderBy method and pass model
      * order by book title
      */
@@ -120,44 +102,6 @@ public class MainController {
     public String findAllByOrderByFirstNameDesc(Model model) {
         List<Author> authors = authorRepo.findAllByOrderByFirstNameDesc();
         model.addAttribute("authorList", authors);
-
-        return "authorPage";
-    }
-
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
-     */
-    @PostMapping("/findByBookTitleContaining")
-    public String findByBookTitleContainingAndBookTitleContaining(Model model) {
-        String javaString = "Java";
-        String introductionString = "Introduction";
-        List<Book> books = bookRepo.findByBookTitleContainingAndBookTitleContaining(javaString, introductionString);
-        model.addAttribute("bookList", books);
-
-        return "authorPage";
-    }
-
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
-     */
-    @PostMapping("/findByBookTitleNotLikeAndContaining")
-    public String findByBookTitleNotLikeAndBookTitleContaining(Model model) {
-        String javaString = "%Java%";
-        String introductionString = "Introduction";
-        List<Book> books = bookRepo.findByBookTitleNotLikeAndBookTitleContaining(javaString, introductionString);
-        model.addAttribute("bookList", books);
-
-        return "authorPage";
-    }
-
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
-     */
-    @PostMapping("/findByBookTitleNotLike")
-    public String findByBookTitleNotLike(Model model) {
-        String javaString = "%Java%";
-        List<Book> books = bookRepo.findByBookTitleNotLike(javaString);
-        model.addAttribute("bookList", books);
 
         return "authorPage";
     }
@@ -193,5 +137,67 @@ public class MainController {
         model.addAttribute("authorList", authors);
 
         return "authorPage";
+    }
+
+    /*
+     * order bookTitle by using the findAllByOrderBy method and pass model
+     * order by book title
+     */
+    @PostMapping("/orderByBookTitle")
+    public String findAllByOrderByBookTitle(Model model) {
+        List<Book> books = bookRepo.findAllByOrderByBookTitle();
+        model.addAttribute("bookList", books);
+
+        return "bookPage";
+    }
+
+       /*
+     * order bookTitle by using the findAllByOrderBy method and pass model
+     * order by book title
+     */
+    @PostMapping("/orderByPrice")
+    public String findAllByOrderByPriceAsc(Model model) {
+        List<Book> books = bookRepo.findAllByOrderByPriceAsc();
+        model.addAttribute("bookList", books);
+
+        return "bookPage";
+    }
+
+    /*
+     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+     */
+    @PostMapping("/findByBookTitleContaining")
+    public String findByBookTitleContainingAndBookTitleContaining(Model model) {
+        String javaString = "Java";
+        String introductionString = "Introduction";
+        List<Book> books = bookRepo.findByBookTitleContainingAndBookTitleContaining(javaString, introductionString);
+        model.addAttribute("bookList", books);
+
+        return "bookPage";
+    }
+
+    /*
+     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+     */
+    @PostMapping("/findByBookTitleNotLikeAndContaining")
+    public String findByBookTitleNotLikeAndBookTitleContaining(Model model) {
+        String javaString = "%Java%";
+        String introductionString = "Introduction";
+        List<Book> books = bookRepo.findByBookTitleNotLikeAndBookTitleContaining(javaString, introductionString);
+        model.addAttribute("bookList", books);
+
+        return "bookPage";
+    }
+
+    /*
+     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+     */
+    @PostMapping("/findByBookTitleNotLike")
+    public String findByBookTitleNotLike(Model model) {
+        String javaString = "%Java%";
+        List<Book> books = bookRepo.findByBookTitleNotLike(javaString);
+        model.addAttribute("bookList", books);
+
+        return "bookPage";
     }
 }
