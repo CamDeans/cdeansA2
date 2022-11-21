@@ -1,6 +1,5 @@
 package com.assignment2.cdeans.model;
 
-import javax.imageio.ImageIO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,0 +1,140 @@
+/*-----Datapair-----*/
+.DataPair{
+  margin-left: 1.1em;
+  margin-right: 1.1em;
+}
+/*----Background Image-----*/
+body {
+  background-color: rgb(236, 225, 235, 0.5); 
+  filter: invert(100%);
+ }
+ /*-----H1/ H1 After/ H2/ .header-p-----*/
+ h1 {
+  color: black;
+  text-align: center;
+  padding-top: 50px;
+  opacity: 0.75;
+}
+h1::after {
+  content: '';
+  background: black;
+  display: block;
+  height: 3px;
+  width: 170px;
+  margin: 20px auto 50px;
+  opacity: 0.75;
+}
+h2 {
+  color: white;
+  text-align: center;
+  padding-top: 50px; 
+  opacity: 0.75;
+}
+.header-p {
+  color: white;
+  text-align: center;
+  padding-top: 50px; 
+  opacity: 0.75;
+}
+ /*-----Container-----*/
+  .container {
+    min-width: 99%;
+    min-height: 95%;
+    box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
+  }
+  /*------Content Box-----*/
+  .content-box {
+    background: white;
+    filter: invert(100%);
+    padding: 5px;
+    min-width: 100%;
+  }
+  /*------Card-----*/
+  .card {
+    display: flex;
+    display: inline-flex;
+    max-height: auto;
+    max-width: auto;
+    display: flex;
+    box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
+    background-color: black;
+    opacity: 0.75;
+  }
+  
+  .card:hover {
+    box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
+    filter: invert(100%);
+  }
+  /*------Back To Top Button-----*/
+#myBtn {
+  display: none; 
+  position: fixed; 
+  bottom: 60px; 
+  right: 45px; 
+  z-index: 99; 
+  border: none; 
+  outline: none; 
+  color: black;
+  background-color: rgba(168, 51, 153, 1); 
+  box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
+  cursor: pointer; 
+  padding: 15px; 
+  border-radius: 10px; 
+  font-size: 18px; 
+}
+#myBtn:hover {
+  color: black;
+  background-color: white; 
+  filter: invert(100%);
+}
+/*------Home Button-----*/
+#myHomeBtn {
+  position: relative; 
+  top: 110px;
+  left: 45px;
+  z-index: 99; 
+  border: none; 
+  outline: none; 
+  color: black;
+  background-color: rgba(168, 51, 153, 1); 
+  box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
+  cursor: pointer; 
+  padding: 15px; 
+  border-radius: 10px; 
+  font-size: 18px; 
+}
+#myHomeBtn:hover {
+  background-color: white; 
+  color: black; 
+  filter: invert(100%);
+}
+/*------Footer------*/
+.contact-info .fa {
+  margin: 10px;
+  font-size: 25px !important;
+  color: rgba(168, 51, 153, 1);
+  filter: invert(100%);
+  font-weight: bold;
+  padding-right: 20px;
+
+}
+.contact-info span {
+  font-size: 20px !important;
+  color:black;
+  opacity: 0.75;
+}
+.copyright {
+  color: black !important;
+  text-align: center;
+  font-size: 20px;
+  opacity: 0.75;
+}
+.footer hr {
+  margin-top: 50px;
+  background: white;
+}
+hr{
+  margin-top: 50px;
+  background: rgba(168, 51, 153, 0.5); 
+  filter: invert(100%);
+}

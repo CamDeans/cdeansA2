@@ -166,8 +166,8 @@ public class MainController {
      * pass lastName by use of @PostMapping and @RequestParam by passing it lastName and model
      */
     @PostMapping("/findLastOrFirst")
-    public String findByLastNameOrFirstName(@RequestParam String lastName, String firstName, Model model) {
-        List<Author> authors = authorRepo.findByLastNameOrFirstName(lastName, firstName);
+    public String findByLastNameIgnoreCaseOrFirstNameIgnoreCase(@RequestParam String lastName, String firstName, Model model) {
+        List<Author> authors = authorRepo.findByLastNameIgnoreCaseOrFirstNameIgnoreCase(lastName, firstName);
         model.addAttribute("authorList", authors);
 
         return "authorPage";
@@ -177,8 +177,8 @@ public class MainController {
      * pass lastName by use of @PostMapping and @RequestParam by passing it lastName and model
      */
     @PostMapping("/findByLastNameStartingWith")
-    public String findByLastNameStartingWith(@RequestParam String prefixString, Model model) {
-        List<Author> authors = authorRepo.findByLastNameStartingWith(prefixString.toUpperCase());
+    public String findByLastNameStartingWithIgnoreCase(@RequestParam String prefixString, Model model) {
+        List<Author> authors = authorRepo.findByLastNameStartingWithIgnoreCase(prefixString.toUpperCase());
         model.addAttribute("authorList", authors);
 
         return "authorPage";

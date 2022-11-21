@@ -25,7 +25,7 @@ public interface AuthorRepo extends CrudRepository<Author, Integer> {
      * findByLastNameContaining() method using infix to pass data, add to H2 table with new @Column
      * and pass String value
      */
-    List<Author> findByLastNameOrFirstName(String lastName, String firstName);
-    List<Author> findByLastNameStartingWith(String prefixString);
+    List<Author> findByLastNameIgnoreCaseOrFirstNameIgnoreCase(String lastName, String firstName);
+    List<Author> findByLastNameStartingWithIgnoreCase(String prefixString);
     List<Author> findByLastNameContainingIgnoreCase(String infixString);
 }
