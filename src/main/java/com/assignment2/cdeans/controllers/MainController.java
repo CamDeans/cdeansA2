@@ -16,11 +16,24 @@ import com.assignment2.cdeans.repos.BookRepo;
 
 @Controller
 public class MainController {
-    // Inject repositories starts
+    
+    /**
+     * inject repositories for authorRepo
+     * import AuthorRepo
+     */
     AuthorRepo authorRepo;
+    /**
+     * inject repositories for bookRepo
+     * import AuthorRepo
+     */
     BookRepo bookRepo;
     
-    // Autowire the indivdual dependenicies
+    
+    /**
+     * @param authorRepo
+     * @param bookRepo
+     * Autowire the indivdual dependenicies for both repos
+     */
     @Autowired
     public MainController(AuthorRepo authorRepo, BookRepo bookRepo) {
         this.authorRepo = authorRepo;
@@ -63,8 +76,18 @@ public class MainController {
     authorRepo.save(david);
     authorRepo.save(dan);    
     }
+    /*
+    * GetMapping/ PostMapping starts
+    * use the PostMapping() method to POST data for author found in MainController, stored in H2 DB
+    * use the GetMapping() method to search MainController for author data
+    */
 
-    // generate @GetMapping starts
+    /**
+     * @param model
+     * @return
+     * generate @GetMapping for authorPage using the getData & findAll method()
+     * pass all author data to authorPage by use of the author.addAttribute() method
+     */
     @GetMapping("/authorPage")
     public String getData(Model model) {
         List<Author> authorList = (List<Author>)authorRepo.findAll();
@@ -73,7 +96,13 @@ public class MainController {
         return "authorPage";
     }
 
-    // generate @GetMapping starts
+    
+    /**
+     * @param model
+     * @return
+     * generate @GetMapping for bookPage using the getData() & findAll() method
+     * pass all book data to authorPage by use of the model.addAtrribute() method
+     */
     @GetMapping("/bookPage")
     public String getData1(Model model) {
         List<Book> bookList = (List<Book>)bookRepo.findAll();
@@ -82,9 +111,11 @@ public class MainController {
         return "bookPage";
     }
 
-     /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
+    /**
+     * @param model
+     * @return
+     * order authors by last name in ascending order using the findAllByOrderBy() method
+     * add authors to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/orderByLastNameAsc")
     public String findAllByOrderByLastNameAsc(Model model) {
@@ -94,9 +125,11 @@ public class MainController {
         return "authorPage";
     }
 
-    /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
+    /**
+     * @param model
+     * @return
+     * order authors by first name in descending order using the findAllByOrderBy() method
+     * add authors to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/orderByFirstNameDesc")
     public String findAllByOrderByFirstNameDesc(Model model) {
@@ -106,8 +139,13 @@ public class MainController {
         return "authorPage";
     }
 
-     /*
-     * pass lastName by use of @PostMapping and @RequestParam by passing it lastName and model
+    /**
+     * @param lastName
+     * @param firstName
+     * @param model
+     * @return
+     * find authors by first or last name using the findBy() method
+     * add authors first or last name to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findLastOrFirst")
     public String findByLastNameIgnoreCaseOrFirstNameIgnoreCase(@RequestParam String lastName, String firstName, Model model) {
@@ -117,8 +155,12 @@ public class MainController {
         return "authorPage";
     }
 
-    /*
-     * pass lastName by use of @PostMapping and @RequestParam by passing it lastName and model
+    /**
+     * @param prefixString
+     * @param model
+     * @return
+     * find authors by last name that start with any given letter by passing a prefixString to the findBy() method
+     * add authors to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findByLastNameStartingWith")
     public String findByLastNameStartingWithIgnoreCase(@RequestParam String prefixString, Model model) {
@@ -128,8 +170,12 @@ public class MainController {
         return "authorPage";
     }
 
-    /*
-     * pass lastName by use of @PostMapping and @RequestParam by passing it lastName and model
+    /**
+     * @param infixString
+     * @param model
+     * @return
+     * find authors by last name that contain any given string of letters by passing a infixString to the findByContaining() method
+     * add authors to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findByLastNameContaining")
     public String findByLastNameContainingIgnoreCase(@RequestParam String infixString, Model model) {
@@ -139,9 +185,11 @@ public class MainController {
         return "authorPage";
     }
 
-    /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
+    /**
+     * @param model
+     * @return
+     * order books by title using the findAllByOrderBy() method
+     * add book titles to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/orderByBookTitle")
     public String findAllByOrderByBookTitle(Model model) {
@@ -151,9 +199,11 @@ public class MainController {
         return "bookPage";
     }
 
-       /*
-     * order bookTitle by using the findAllByOrderBy method and pass model
-     * order by book title
+    /**
+     * @param model
+     * @return
+     * order books by price using the findAllByOrderBy() method
+     * add books price to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/orderByPrice")
     public String findAllByOrderByPriceAsc(Model model) {
@@ -163,8 +213,11 @@ public class MainController {
         return "bookPage";
     }
 
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+    /**
+     * @param model
+     * @return
+     * find books by title that contain javaString or introductionString by passing both parameters to the findByContaining() method
+     * add book titles to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findByBookTitleContaining")
     public String findByBookTitleContainingAndBookTitleContaining(Model model) {
@@ -176,8 +229,11 @@ public class MainController {
         return "bookPage";
     }
 
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+    /**
+     * @param model
+     * @return
+     * find books that do not contain "Java", but do contain "Intruction" in the title by passing 2 strings to the findByNotLikeContaining() method
+     * add book titles to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findByBookTitleNotLikeAndContaining")
     public String findByBookTitleNotLikeAndBookTitleContaining(Model model) {
@@ -189,8 +245,11 @@ public class MainController {
         return "bookPage";
     }
 
-    /*
-     * pass Introduction as a string by use of @PostMapping and findByBookTitleContining method and model
+    /**
+     * @param model
+     * @return
+     * find book titles that do not contain "Java" in the title by passing javaStrings to the findByNotLike() method
+     * add book titles to dynamic page by use of the model.addAttribute() method
      */
     @PostMapping("/findByBookTitleNotLike")
     public String findByBookTitleNotLike(Model model) {

@@ -5,7 +5,8 @@
 }
 /*----Background Image-----*/
 body {
-  background-color: rgb(236, 225, 235, 0.5); 
+  background-color: rgb(228, 125, 125);
+  opacity: 0.75;
   filter: invert(100%);
  }
  /*-----H1/ H1 After/ H2/ .header-p-----*/
@@ -63,7 +64,8 @@ h2 {
   
   .card:hover {
     box-shadow: 0 35px 50px 0 rgba(6, 5, 5, 1);
-    filter: invert(100%);
+    background-color: rgb(174, 144, 144);
+    opacity: 0.75;
   }
   /*------Back To Top Button-----*/
 #myBtn {
